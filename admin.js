@@ -254,17 +254,32 @@ function getWithdrawals() {
       return;
     }
 
-    let sn = 1;
+    // Collect all docs into an array
+    const withdrawalsArray = [];
     snapshot.forEach((docSnap) => {
-      const w = docSnap.data();
-      const id = docSnap.id;
+      const data = docSnap.data();
+      data.id = docSnap.id; // keep the doc ID
+      withdrawalsArray.push(data);
+    });
+
+    // Sort by date descending (most recent first)
+    withdrawalsArray.sort((a, b) => {
+      const dateA = a.date?.seconds ? a.date.seconds * 1000 : 0;
+      const dateB = b.date?.seconds ? b.date.seconds * 1000 : 0;
+      return dateB - dateA; // descending
+    });
+
+    // Build table HTML
+    let sn = 1;
+    withdrawalsArray.forEach((w) => {
+      const id = w.id;
 
       // Format date requested
       const dateRequested = w.date?.seconds
         ? new Date(w.date.seconds * 1000).toLocaleDateString()
         : "—";
 
-      // Convert details object to string for display
+      // Convert details object to string
       let detailsStr = "—";
       if (w.details && typeof w.details === "object") {
         detailsStr = Object.entries(w.details).map(([k, v]) => `${k}: ${v}`).join(", ");
