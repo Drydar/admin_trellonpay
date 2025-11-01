@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrellonPay|Login</title>
+<link rel="stylesheet" href="login.css">
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script type="module" src="login.js"></script>
+
+<style>
+/* ==============================
+   Popup Notification (Top Center)
+============================== */
+.popup-message {
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: #444;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+.popup-message.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.popup-message.success {
+  background: #2ecc71; /* Green */
+}
+.popup-message.error {
+  background: #e74c3c; /* Red */
+}
+.popup-message.info {
+  background: #3498db; /* Blue */
+}
+  .spinner-border {
+      width: 1rem;
+      height: 1rem;
+    }
+
+  .container {
+    position: relative;
+    width: 380px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    transition: height 0.4s ease;
+  }
+
+  .container.signup-mode {
+    height: 420px;
+  }
+  
+  #message {
+      padding: 20px;
+    border-radius: 9px;
+  }
+  #message:after {
+    display: none;
+  }
+    #logo{ width:170px }
+
+</style>
+</head>
+
+<body>
+
+  <!-- Animated background -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+  <div id="message"></div>
+  <div id="logo_body">
+    <img src="logo.png" class="img_fluid" id="logo" alt="logo">
+  </div>
+    
+  <div class="container" id="container">
+    
+    <!-- Login Form -->
+    <div class="form" id="loginForm">
+      <h2>Welcome Back!!</h2>
+      <div class="input-box">
+        <input type="email" id="loginEmail" required>
+        <label>Email</label>
+      </div>
+      <div class="input-box">
+        <input type="password" id="loginPassword" required>
+        <label>Password</label>
+        <span class="toggle-password" onclick="togglePassword('loginPassword', this)">👁️</span>
+      </div>
+      <p class="text-center mt-3">
+        <span class="toggle-link" id="forgotPassword">Forgot Password?</span>
+      </p>
+      <button id="loginBtn">Login</button>
+
+      <div class="switch">
+        Don’t have an account? <span onclick="toggleMode()">Sign Up</span>
+      </div>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="form" id="signupForm">
+      <h2>Create Account</h2>
+      <div class="input-box">
+        <input type="text" id="signupName" required>
+        <label>Full Name</label>
+      </div>
+      <div class="input-box">
+        <input type="email" id="signupEmail" required>
+        <label>Email</label>
+      </div>
+      <div class="input-box">
+        <input type="password" id="signupPassword" required>
+        <label>Password</label>
+        <span class="toggle-password" onclick="togglePassword('signupPassword', this)">👁️</span>
+      </div>
+      <button id="signupBtn">Sign Up</button>
+
+      <div class="switch">
+        Already have an account? <span onclick="toggleMode()">Login</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-containe position-fixed bottom-0 end-0 p-3"></div>
+
+<script>
+  const container = document.getElementById('container');
+
+  // Toggle between login and signup mode with smooth slide
+  function toggleMode() {
+    container.classList.toggle('signup-mode');
+  }
+
+  // Toggle password visibility
+  function togglePassword(id, el) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') {
+      input.type = 'text';
+      el.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      el.textContent = '👁️';
+    }
+  }
+</script>
+
+</body>
+</html>

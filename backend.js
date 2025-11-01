@@ -257,9 +257,115 @@ export async function updateUserPoints(userId, newPoints) {
   }
 }
 
+
 // ================================
 // WITHDRAWAL HANDLERS (Merged from withdraw.js)
 // ================================
+// ===============================
+// 📜 Load User Withdrawal History
+// ===============================
+import { 
+  query, 
+  where, 
+  orderBy, 
+  onSnapshot 
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+function loadUserWithdrawals() {
+  const table = document.getElementById("userWithdrawalsTableBody");
+  if (!table) return;
+
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      table.innerHTML = `
+        <tr><td colspan="6" style="text-align:center; color:gray;">
+          Please log in to view your withdrawals.
+        </td></tr>`;
+      return;
+    }
+
+    // Fetch all withdrawals for the user without ordering
+    const q = query(
+      collection(db, "withdrawals"),
+      where("email", "==", user.email)
+    );
+
+    onSnapshot(q, (snapshot) => {
+      if (snapshot.empty) {
+        table.innerHTML = `
+          <tr><td colspan="6" style="text-align:center; color:gray;">
+            No transactions yet.
+          </td></tr>`;
+        return;
+      }
+
+      // Collect data into an array
+      let withdrawals = [];
+      snapshot.forEach((docSnap) => {
+        withdrawals.push(docSnap.data());
+      });
+
+      // Sort by date in descending order (most recent first)
+      withdrawals.sort((a, b) => {
+        const dateA = a.date?.toDate ? a.date.toDate() : new Date(0);
+        const dateB = b.date?.toDate ? b.date.toDate() : new Date(0);
+        return dateB - dateA; // Descending
+      });
+
+      // Build table HTML
+      let sn = 1;
+      let tableHTML = "";
+      withdrawals.forEach((w) => {
+        const date = w.date?.toDate
+          ? w.date.toDate().toLocaleString()
+          : "—";
+
+        tableHTML += `
+          <tr style="padding: 5px;">
+            <td>${sn++}</td>
+            <td>${w.type || "—"}</td>
+            <td>${w.amount || 0}</td>
+            <td>${formatDetails(w.details)}</td>
+            <td style="text-transform:capitalize; color:${statusColor(w.status)};">
+              ${w.status || "pending"}
+            </td>
+            <td>${date}</td>
+          </tr>`;
+      });
+
+      table.innerHTML = tableHTML;
+    });
+  });
+}
+
+// Helper: Format details object
+
+
+// Run when page loads
+loadUserWithdrawals();
+
+// Helper: Format details object
+function formatDetails(details) {
+  if (!details) return "—";
+  if (typeof details === "string") return details;
+  return Object.entries(details)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(", ");
+}
+
+// Helper: Status color
+function statusColor(status) {
+  switch (status) {
+    case "completed": return "green";
+    case "pending": return "orange";
+    case "canceled":
+    case "declined": return "red";
+    default: return "gray";
+  }
+}
+
+// Run when page loads
+loadUserWithdrawals();
 
 // Helper popup reused
 function withdrawPopup(message, type = "success") {

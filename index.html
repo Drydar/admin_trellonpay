@@ -1,168 +1,361 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TrellonPay — Admin Dashboard</title>
-  <script src="https://unpkg.com/feather-icons"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrellonPay</title>
+  <script type="module" src="backend.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="admin.js"></script>
 </head>
 <body>
-
-  <header class="app-header">
-    <div class="left">
-      <button id="btnOpen" class="icon-btn" title="Menu">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-      <img src="logo.png" class="the_logo">
-    </div>
-
-    <div class="right">
-      <div class="profile">
-        <div class="avatar">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="#e6eef6"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-3.314 3.582-6 8-6s8 2.686 8 6"/></svg>
-        </div>
-        <div>
-          <div style="font-weight:600; font-size:14px">Admin</div>
-          <div class="muted" style="font-size:12px"><span id="userEmail"></span></div>
-        </div>
-      </div>
-    </div>
+  <header>
+    <img src="logo2.png" class="logo">
+    <span id="userEmailHeader"></span>
   </header>
 
+  <main>
+    <section id="home" class="active fade-in">
+      <div class="info-bar">
+        <p>🔥 Welcome to TrellonPay! Earn daily by watching ads | Withdraw anytime you reach 1000 points | Avoid multiple accounts 🚫 | Join our Telegram community now! 💬</p>
+      </div>
+      <h2>Welcome to TrellonPay!</h2>
+      <p>Watch ads daily and earn redeemable points.</p>
+      <div class="rules">
+        <div class="rules-card fade-in" style="margin-top: 20px;">
+          <h3>📜 How to Earn</h3>
+          <ul>
+            <li>Click on the "Earn" page and watch rewarded ads every 20 seconds to gain points.</li>
+            <li>Each ad you watch gives you a stipulated award.</li>
+            <li>Watch more ads daily to increase your earnings to qualify for bonuses.</li>
+            <li>You'll only be credited after watching a complete Ad.<br>Don't close an Ad half way.</li>
+          </ul>
+        </div>
+        <div class="rules-card fade-in" style="margin-top: 20px;">
+          <h3>🪙 Bonuses</h3>
+          <ul>
+            <li><b>Bronze Bonus:</b> Watching up to 10 Ads per day gives you an extra 15% of your total earnings for that day.</li>
+            <li><b>Gold Bonus: </b>Watching up to 20 extra Ads per day give you an extra 25% profit of your earnings for that day.</li>
+            <li><b>Referral Bonus:</b> You get an instant 100points for every 3 referrals you bring in and you also make 1% extra from all the earnings of your referral.</li>
+          </ul>
+        </div>
+        <div class="rules-card fade-in" style="margin-top: 20px;">
+          <h3>🚫 Avoid Account Suspension</h3>
+          <ul>
+            <li>❌ No multiple accounts. One account per person only.</li>
+            <li>❌ No fake referrals. Referrals must be real and active users.</li>
+            <li>❌ No automation. Using bots, scripts, VPNs, or fake devices to gain points is prohibited</li>
+            <li><b>Be honest — 🔴 Violation of any rule may result in suspension or permanent account termination without prior notice.</b></li>
+          </ul>
+        </div>
+        <div class="rules-card fade-in" style="margin-top: 20px;">
+          <h3>💵 Withdrawals</h3>
+          <ul>
+            <li>💰 Minimum withdrawal amount: Must reach the minimum threshold of 200 points <br>(1point = ₦1).</li>
+            <li>Withdraw directly from your wallet on the "Withdraw" page.<br>
+              🕒 Withdrawals are processed within 2hours after request.
+            </li>
+            <li>You can withdraw as many times as you want. Just stay above minimum withdrawal threshold of 200 points.</li>
+          </ul>
+        </div>
+        <div class="rules-card fade-in" style="margin-top: 20px;">
+          <h3>💬 Join Our Community</h3>
+          <p>Stay updated and get support on our <a href="#" class="telegram-link">Telegram Community</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="earn">
+      <div class="earn-tabs">
+        <button class="earn-tab-btn active" data-tab="watchAds">Watch Ads</button>
+        <button class="earn-tab-btn" data-tab="tasks">Sponsored Tasks</button>
+      </div>
+      <h2>Earn Points</h2>
+      <div id="watchAds" class="earn-tab active fade-in">
+        <div class="ad-box" data-points="10">
+          <div class="reward">
+            <p style="color: gold;">Rewarded ad video</p>
+            <p>Click to watch video ad</p>
+            <p>Complete video to earn</p>
+            <p style="color:gold">+10 points</p>
+          </div>
+          <span class="countdown">Ready</span>
+        </div>
+        <div class="ad-box" data-points="10">
+          <div class="reward">
+            <p style="color: gold;">Rewarded ad video</p>
+            <p>Click to watch video ad</p>
+            <p>Complete video to earn</p>
+            <p style="color:gold">+10 points</p>
+          </div>
+          <span class="countdown">Ready</span>
+        </div>
+        <div class="ad-box" data-points="10">
+          <div class="reward">
+            <p style="color: gold;">Rewarded ad video</p>
+            <p>Click to watch video ad</p>
+            <p>Complete video to earn</p>
+            <p style="color:gold">+10 points</p>
+          </div>
+          <span class="countdown">Ready</span>
+        </div>
+      </div>
+
+      <div id="tasks" class="earn-tab" style="display:none;">
+        <div class="task-box">
+          <h4>Facebook Tasks</h4>
+          <div class="task-list">
+            <div class="task-item" data-points="15"><span class="label">👍 Like our page</span><span class="points">+15</span><span class="countdown">Ready</span></div>
+            <div class="task-item" data-points="10"><span class="label">📢 Share our post</span><span class="points">+10</span><span class="countdown">Ready</span></div>
+            <div class="task-item" data-points="10"><span class="label">👥 Follow our page</span><span class="points">+10</span><span class="countdown">Ready</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modern Profile Page -->
+    <section id="profile">
+      <h2 style="margin-bottom: 20px;">User Profile</h2>
+      <img src="avatar3.jpg" class="avatar" style="margin-bottom: 10px;">
+      <div class="profile-card fade-in" style="margin-top: 20px;">
+        <div class="profile-detail"><h4>User:</h4> <h4 id="userName"></h4></div>
+        <div class="profile-detail"><h4>Points Earned:</h4> <h4 id="userPoints"></h4></div>
+      </div>
+      
+      <div class="profile-card fade-in" style="margin-top: 20px;">
+        <div class="profile-detail"><span>Email:</span> <span id="userEmail"></span></div>
+        <div class="profile-detail"><span>Joined:</span> <span id="userDateJoined"></span></div>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+      <script type="module">
+        import { logoutUser } from './backend.js';
+      
+        // Attach logout function to a button
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', () => {
+            logoutUser(); // call your function
+          });
+        }
+      </script>
+    </section>
+
+    <!-- WITHDRAWAL PAGE -->
+    <section id="withdraw">
+      <h2>Withdraw Funds</h2>
+      <p>Minimum withdrawal is 200 points</p>
+      <p>Any withdrawal below 200 points will be rejected.</p>
+      <button id="historyBtn" style="margin-top: 20px; padding: 10px 20px; border: none; border-radius: 10px; background: black; color: #ff6600; font-weight: 600;">Transaction History</button>
+      <button id="requestBtn" style="margin-top: 20px; padding: 10px 20px; border: none; border-radius: 10px; background: #fff; color: #ff6600; font-weight: 600;">Request Withdrawal</button>
+    </section>
+  </main>
+  <!-- BACKDROP -->
   <div id="overlay" class="overlay"></div>
-
-  <div class="app-layout">
-    <aside id="sidebar" class="sidebar">
-      <div class="brand">
-        <div class="logo">
-          <img src="favicon.png" style="width: 30px;">
-        </div>
-        <div>
-          <div style="font-weight:700">TrellonPay</div>
-          <div class="muted" style="font-size:12px">Admin panel</div>
-        </div>
-      </div>
-      <nav class="nav">
-        <button class="active" data-target="overview">🏠 Overview</button>
-        <button data-target="users">👥 Users</button>
-        <button data-target="withdrawals">💸 Withdrawals</button>
-        <button data-target="leaderboard">🏆 Leaderboard</button>
-        <button data-target="settings">⚙️ Settings</button>
-      </nav>
-    </aside>
-
-    <main id="main" class="app-main">
-      <div class="container">
-
-        <!-- OVERVIEW -->
-        <section id="overview" class="tab-pane active">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px">
-            <div>
-              <h2 style="margin:0 0 6px 0">🏠 Overview</h2>
-              <div class="muted">Platform summary</div>
-            </div>
-          </div>
-
-          <div class="cards">
-            <div class="card">
-              <small>Registered Users</small>
-              <h3 id="totalUsers"></h3>
-            </div>
-            <div class="card">
-              <small>Daily Active Users</small>
-              <h3 id="dailyActiveUsers"></h3>
-            </div>
-            <div class="card">
-              <small>Pending Withdrawals</small>
-              <h3 id="pendingWithdrawals"></h3>
-            </div>
-            <!--<div class="card">
-              <small>Completed Withdrawals</small>
-              <h3 id="completedWithdrawals"></h3>
-            </div>-->
-            <div class="card">
-              <small>Total Points Shared</small>
-              <h3 id="totalPoints"></h3>
-            </div>
-            <div class="card">
-              <small>Total Points Shared (This Week)</small>
-              <h3 id="weeklyPoints"></h3>
-            </div>
-            <div class="card">
-              <small>Total Points Shared (This Month)</small>
-              <h3 id="monthlyPoints"></h3>
-            </div>
-            
-            
-                
-                <button class="btn" id="refreshBtn" style="padding: 10px;">Refresh Dashboard</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- USERS -->
-        <section id="users" class="tab-pane">
-          <h2>👥 Users & Information</h2>
-          <div class="table-wrapper">
-            <table id="usersTableBody">
-            </table>
-          </div>
-        </section>
-
-        <!-- WITHDRAWALS -->
-        <section id="withdrawals" class="tab-pane">
-          <h2>💸 Withdrawal Requests</h2>
-          <div class="table-wrapper">
-            <table id="withdrawalsTableBody"></table>
-          </div>
-        </section>
-
-        <!-- LEADERBOARD -->
-        <section id="leaderboard" class="tab-pane">
-          <h2>🏆 Leaderboard</h2>
-          <div class="leaderboard">
-            <li id="leaderboard"></li>
-          </div>
-        </section>
-
-        <!-- SETTINGS -->
-        <section id="settings" class="tab-pane">
-          <h2>⚙️ Settings</h2>
-          <div class="card" style="margin-bottom: 10px;"><p class="muted">Admin configuration options will appear here.</p></div>
-          <div class="card">
-            <p class="muted">Logout</p>
-           </div>
-        </section>
-
-      </div>
-    </main>
+  
+  <!--Transaction History Popup-->
+  <div id="historyPopup" class="history-popup">
+    <h3>Your Withdrawal History</h3>
+    <table border="1" style="width:100%; border-collapse:collapse; font-size: 10px; color: black;">
+      <thead style="background:#f4f4f4;">
+        <tr>
+          <th>S/N</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Details</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="userWithdrawalsTableBody">
+        <tr><td colspan="6" style="text-align:center; color:gray;">Loading...</td></tr>
+      </tbody>
+    </table>
+    <button class="close-popup" id="closeHistory">Close</button>
   </div>
 
-  <script>
-    if (window.feather) feather.replace();
+  <!-- WITHDRAWAL POPUP -->
+  <div id="withdrawPopup" class="withdraw-popup">
+    <h3>Select Withdrawal Option</h3>
+    <div id="options">
+      <div class="withdraw-option" data-type="airtime">📱 Airtime</div>
+      <div class="withdraw-option" data-type="bank">🏦 Bank Transfer</div>
+      <div class="withdraw-option" data-type="studypro">🎓 StudyPro Wallet</div>
+    </div>
 
-    const btnOpen = document.getElementById('btnOpen');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const navButtons = sidebar.querySelectorAll('nav button');
-    const panes = document.querySelectorAll('section.tab-pane');
-    function showPane(id){
-      panes.forEach(p => p.classList.toggle('active', p.id === id));
-      navButtons.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+    <form id="airtimeForm" class="withdraw-form">
+      <label>Phone Number</label>
+      <input id="airtimePhone" type="tel" placeholder="e.g. 08012345678">
+      <label>Network</label>
+      <select id="network">
+        <option>MTN</option>
+        <option>Airtel</option>
+        <option>Glo</option>
+        <option>9mobile</option>
+      </select>
+      <label>Amount</label>
+      <input id="airtimeAmount" type="number" placeholder="Enter amount (minimum=200points)">
+      <button type="submit" id="airtimeBtn" class="submit">Request Airtime</button>
+    </form>
+
+    <form id="bankForm" class="withdraw-form">
+      <label>Account Number</label>
+      <input id="accountNumber" type="number" placeholder="Enter account number">
+      <label>Bank Name</label>
+      <input id="bankName" type="text" placeholder="Enter bank name">
+      <label>Name on Account</label>
+      <input id="accountName" type="text" placeholder="Enter name on account">
+      <label>Amount</label>
+      <input id="bankAmount" type="number" placeholder="Enter amount">
+      <button type="submit" id="bankBtn" class="submit">Request Bank Transfer</button>
+    </form>
+
+    <form id="studyForm" class="withdraw-form">
+      <label>StudyPro Email</label>
+      <input type="email" id="studyproEmail" placeholder="Enter StudyPro email">
+      <label>Amount</label>
+      <input type="number" id="studyproAmount" placeholder="Enter amount">
+      <button type="submit" id="studyproBtn" class="submit">Request to StudyPro</button>
+    </form>
+
+    <button class="close-popup" id="closeWithdraw">Close</button>
+  </div>
+
+  <footer>
+    <button class="nav-btn active" data-target="home">Home</button>
+    <button class="nav-btn" data-target="earn">Earn</button>
+    <button class="nav-btn" data-target="profile">Profile</button>
+    <button class="nav-btn" data-target="withdraw">Withdraw</button>
+  </footer>
+
+  <div id="popup" class="popup">✅ Completed: Points have been sent to you.</div>
+
+  <script>
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const sections = document.querySelectorAll('section');
+    const popup = document.getElementById('popup');
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-target');
+        sections.forEach(sec => {
+          sec.classList.remove('active', 'fade-in');
+          if (sec.id === target) sec.classList.add('active', 'fade-in');
+        });
+      });
+    });
+
+    const earnTabs = document.querySelectorAll('.earn-tab-btn');
+    earnTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        earnTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const selected = tab.getAttribute('data-tab');
+        document.querySelectorAll('.earn-tab').forEach(sec => sec.style.display = 'none');
+        document.getElementById(selected).style.display = 'block';
+      });
+    });
+
+    function startCooldown(el, seconds = 20) {
+      el.classList.add('disabled');
+      const countdownSpan = el.querySelector('.countdown');
+      let remaining = seconds;
+      if (countdownSpan) countdownSpan.textContent = `${remaining}s`;
+      const iv = setInterval(() => {
+        remaining--;
+        if (countdownSpan) countdownSpan.textContent = `${remaining}s`;
+        if (remaining <= 0) {
+          clearInterval(iv);
+          el.classList.remove('disabled');
+          if (countdownSpan) countdownSpan.textContent = 'Ready';
+        }
+      }, 1000);
     }
 
-    function openSidebar(){ sidebar.classList.add('show'); overlay.classList.add('show'); }
-    function closeSidebar(){ sidebar.classList.remove('show'); overlay.classList.remove('show'); }
+    function showPopup(earned) {
+      popup.textContent = `✅ Completed: +${earned} points`;
+      popup.classList.add('show');
+      setTimeout(() => popup.classList.remove('show'), 2000);
+    }
 
-    btnOpen.addEventListener('click', () => sidebar.classList.contains('show') ? closeSidebar() : openSidebar());
-    overlay.addEventListener('click', closeSidebar);
+    function awardPoints(amount) {
+      const pointsEl = document.getElementById('userPoints');
+      let current = parseInt(pointsEl.innerText) || 0;
+      pointsEl.innerText = current + amount;
+    }
 
-    navButtons.forEach(btn => btn.addEventListener('click', () => {
-      showPane(btn.dataset.target);
-      if (window.innerWidth < 992) closeSidebar();
-    }));
+    document.querySelectorAll('.ad-box').forEach(ad => {
+      const countdownSpan = ad.querySelector('.countdown');
+      if (countdownSpan) countdownSpan.textContent = 'Ready';
+      ad.addEventListener('click', () => {
+        if (ad.classList.contains('disabled')) return;
+        const earned = parseInt(ad.getAttribute('data-points')) || 0;
+        setTimeout(() => {
+          awardPoints(earned);
+          showPopup(earned);
+          startCooldown(ad, 20);
+        }, 2000);
+      });
+    });
+
+    document.querySelectorAll('.task-item').forEach(item => {
+      const countdownSpan = item.querySelector('.countdown');
+      if (countdownSpan) countdownSpan.textContent = 'Ready';
+      item.addEventListener('click', () => {
+        if (item.classList.contains('disabled')) return;
+        const earned = parseInt(item.getAttribute('data-points')) || 0;
+        awardPoints(earned);
+        showPopup(earned);
+        startCooldown(item, 20);
+      });
+    });
+  
+  //Transaction History
+    const historyBtn = document.getElementById("historyBtn");
+    const historyPopup = document.getElementById("historyPopup");
+    const closeHistory= document.getElementById("closeHistory");
+    
+    historyBtn.addEventListener("click", () => {
+      historyPopup.classList.add("show");
+    });
+
+    closeHistory.addEventListener("click", () => {
+      historyPopup.classList.remove("show");
+    });
+
+  
+  // WITHDRAW POPUP
+    const requestBtn = document.getElementById("requestBtn");
+    const withdrawPopup = document.getElementById("withdrawPopup");
+    const closeWithdraw = document.getElementById("closeWithdraw");
+    const overlay = document.getElementById("overlay");
+    const options = document.querySelectorAll(".withdraw-option");
+    const forms = document.querySelectorAll(".withdraw-form");
+
+    requestBtn.addEventListener("click", () => {
+      withdrawPopup.classList.add("show");
+      overlay.classList.add("show");
+      forms.forEach(f => f.classList.remove("active"));
+    });
+
+    closeWithdraw.addEventListener("click", () => {
+      withdrawPopup.classList.remove("show");
+      overlay.classList.remove("show");
+    });
+
+    overlay.addEventListener("click", () => {
+      withdrawPopup.classList.remove("show");
+      overlay.classList.remove("show");
+    });
+
+    options.forEach(option => {
+      option.addEventListener("click", () => {
+        const type = option.getAttribute("data-type");
+        forms.forEach(f => f.classList.remove("active"));
+        if (type === "airtime") document.getElementById("airtimeForm").classList.add("active");
+        if (type === "bank") document.getElementById("bankForm").classList.add("active");
+        if (type === "studypro") document.getElementById("studyForm").classList.add("active");
+      });
+    });
   </script>
 </body>
 </html>
