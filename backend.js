@@ -322,7 +322,7 @@ if (bankForm) {
         email: user.email,
         type: "bank",
         amount: parseFloat(amount),
-        details: { bankName, accountNumber },
+        details: { bankName, accountNumber, accountName },
         status: "pending",
         date: serverTimestamp(),
       });
